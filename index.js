@@ -5,6 +5,8 @@ const app = express();
 const postRouter = require("./routes/postRoute")
 const authRouter = require("./routes/userRoutes")
 const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`
+var cors = require('cors')
+
 // Redis setup
 const redis = require('redis')
 const session = require('express-session')
@@ -39,6 +41,8 @@ mongoose.connect(mongoURL,{
 connectWithRetry();
 
 
+app.enable("trust proxy");
+app.use(cors())
 
 
 /*********************** Configration for Sessions ********************************/
@@ -63,8 +67,9 @@ app.use(
 const port = process.env.PORT || 3000;
 app.use(express.json());
 
-app.get('/api//v1', (req, res) =>{
+app.get('/api/v1', (req, res) =>{
     res.send(`<h1>Hello Manish from express app11<\h1>`)
+    console.log("it is running")
 })
 
 app.use("/api/v1/posts",postRouter)
