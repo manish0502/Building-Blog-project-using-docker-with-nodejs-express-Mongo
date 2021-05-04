@@ -5,7 +5,6 @@ const app = express();
 const postRouter = require("./routes/postRoute")
 const authRouter = require("./routes/userRoutes")
 const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`
-
 // Redis setup
 const redis = require('redis')
 const session = require('express-session')
@@ -53,7 +52,7 @@ app.use(
         name:"Blog-app",
         secure:false,
         httpOnly: true,
-        maxAge: 30000
+        maxAge: 60000
 
       }
       
